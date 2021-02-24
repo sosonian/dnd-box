@@ -1,6 +1,7 @@
 {
   "name": "dnd-box-example",
   "homepage": ".",
+  "author": "sosonian",
   "version": "0.0.0",
   "private": true,
   "scripts": {
