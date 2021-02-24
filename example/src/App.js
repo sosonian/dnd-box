@@ -1,10 +1,11 @@
 import React from 'react'
-
-import { ExampleComponent } from 'dnd-box'
+import MainBody from './MainBody'
 import 'dnd-box/dist/index.css'
 
+
+
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <div><MainBody/></div>
 }
 
 export default App
