@@ -96,10 +96,10 @@ DnDLayout 的 props 列表
 ### boxesSetting
 Array of Object, each object is the initial state of box. Each box state has those attributes:
 * boxID : String or number ,the ID of box. Input could be number or string, but must be unique. If ID is duplicate, second one would be assigned a new unique ID automatically (use uuidv4), and so is if ID is not given
-* width : Number, the width of box (CSS property : width). If value is not a number,  or value is null, it would resigned as 200 (200px).
-* height : Number, the height of box (CSS property : height). If value is not a number,  or value is null, it would resigned as 200 (200px).
-* x : Number, the horizontal position of box (CSS property : left). If value is not a number,  or value is null, it would resigned.
-* y : Number, the vertical position of box (CSS property : top). If value is not a number,  or value is null, it would resigned.
+* width : Number, the width of box (CSS property : width). If value is not a number,  or value is null, it would be assigned as 200 (200px).
+* height : Number, the height of box (CSS property : height). If value is not a number,  or value is null, it would be assigned as 200 (200px).
+* x : Number, the horizontal position of box (CSS property : left). If value is not a number,  or value is null, it would be given a valid value automatically.
+* y : Number, the vertical position of box (CSS property : top). If value is not a number,  or value is null, it would be given a valid value automatically.
 
 The number of box is determined by the length of Array.
 
