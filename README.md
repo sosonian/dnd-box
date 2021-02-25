@@ -53,11 +53,7 @@ class DemoApp extends Component {
                 y:100
             },
             {
-                boxID:2,
-                width:200,
-                height:200,
-                x:200,
-                y:100
+                boxID:2
             }
         ]
         
