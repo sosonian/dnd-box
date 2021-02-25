@@ -22,8 +22,8 @@ dnd-box 僅需安裝 React，不須 jQuery 或其他程式庫
 - [Contribute](#contribute)
 
 ## Demos
-1.[Showcase](#https://sosonian.github.io/dndboxdemo/)
-2.[THREE.js]
+- [Showcase](https://sosonian.github.io/dndboxdemo/)
+- [THREE.js]
 
 ## Features
 * Draggable box (sub window)
