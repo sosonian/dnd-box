@@ -4,14 +4,14 @@
 
 [![NPM](https://img.shields.io/npm/v/dnd-box.svg)](https://www.npmjs.com/package/dnd-box) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+
+dnd-box is a layout system that mimics those ones used in Photoshop, VisualStudio, AutoCad which sub windows could be placed, draged, resized, combined with another sub window by user.
+dnd-box is React-only and does not require jQuery
+
 dnd-box 提供了類似 Photoshop、VisualStudio、AutoCad 等桌面應用程式中，可由使用者任意拖曳、縮放、組合功能面版視窗的功能
 dnd-box 僅需安裝 React，不須 jQuery 或其他程式庫
 
-dnd-box is a layout system that mimics those ones used in Photoshop、VisualStudio、AutoCad which sub windows could be placed, draged, resized, combined by user in anywhere on the workspace.
-dnd-box is React-only and does not require jQuery
-
 ## Table of Contents
-
 
 - [Demos](#demos)
 - [Features](#features)
@@ -22,7 +22,7 @@ dnd-box is React-only and does not require jQuery
 - [Contribute](#contribute)
 
 ## Demos
-1.[Showcase]
+1.[Showcase](#https://sosonian.github.io/dndboxdemo/)
 2.[THREE.js]
 
 ## Features
@@ -43,31 +43,6 @@ import React, { Component } from 'react'
 import { DnDContainer,DnDLayout } from 'dnd-box'
 
 class DemoApp extends Component {
-    constructor(props){
-        super(props)
-        this.state={
-            showContainer:null,
-            toggleDnDLayer:true 
-        }
-    }
-
-    showContainerClick=()=>{
-        this.setState({
-            showContainer:[1,2,3,4,5]
-        },()=>{
-            this.setState({
-                showContainer:null
-            })
-        })
-    }
-
-    toggleDnDLayoutClick=()=>{
-        this.setState({
-            toggleDnDLayer:!this.state.toggleDnDLayer
-        })
-    }
-
-
     render() {
         let boxesSetting=[
             {
@@ -83,67 +58,27 @@ class DemoApp extends Component {
                 height:200,
                 x:200,
                 y:100
-            },
-            {
-                boxID:3,
-                width:200,
-                height:200,
-                x:400,
-                y:100
-            },
-            {
-                boxID:4,
-                width:200,
-                height:200,
-                x:600,
-                y:100
-            },
-            {
-                boxID:5,
-                width:200,
-                height:200,
-                x:600,
-                y:100
             }
         ]
+        
         return (
-            <div style={{widht:'100vw',height:'100vh'}}>
-                <div style={{display:'flex',width:'100%',height:'50px'}}> 
-                    <button onClick={this.toggleDnDLayoutClick}>Toggle DnDLayout</button>
-                    <button onClick={this.showContainerClick}>Show Default DnDContainer</button>
-                </div>
-                {
-                    this.state.toggleDnDLayer?
-                    <DnDLayout backgroundColor={"pink"} width={'100%'} height={800}  boxTabRadius={'0px 10px 0px 0px'} boxesSetting={boxesSetting} tabHeight={40} openContainer={this.state.showContainer}>
-                        <DnDContainer containerTabTitle={"TabA"} containerID={1} boxID={1}>
-                            <div style={{backgroundColor:'yellow',height:'100%'}}>
-                                {"GrandChildrenB"}
-                            </div>
-                        </DnDContainer>
-                        <DnDContainer containerTabTitle={"TabB"} containerID={2} boxID={1}>
-                            <div style={{backgroundColor:'green',height:'100%'}}>
-                                {"GrandChildrenB"}
-                            </div>
-                        </DnDContainer>
-                        <DnDContainer containerTabTitle={"TabC"} containerID={3} boxID={2}>
-                            <div style={{backgroundColor:'brown',height:'100%'}}>
-                                {"GrandChildrenC"}
-                            </div>
-                        </DnDContainer>
-                        <DnDContainer containerTabTitle={"TabD"} containerID={4} boxID={2}>
-                            <div style={{backgroundColor:'gray',height:'100%'}}>
-                                {"GrandChildrenD"}
-                            </div>
-                        </DnDContainer>
-                        <DnDContainer containerTabTitle={"TabE"} containerID={5} boxID={3}>
-                            <div style={{backgroundColor:'white',height:'100%'}}>
-                                {"GrandChildrenE"}
-                            </div>
-                        </DnDContainer>               
-                    </DnDLayout>
-                    :null
-                }
-            </div>
+            <DnDLayout width={1800} height={800}>
+                <DnDContainer containerTabTitle={"TabA"} containerID={1} boxID={1}>
+                    <div>
+                        {"ChildrenComponentA"}
+                    </div>
+                </DnDContainer>
+                <DnDContainer containerTabTitle={"TabB"} containerID={2} boxID={1}>
+                    <div>
+                        {"ChildrenComponentB"}
+                    </div>
+                </DnDContainer>
+                <DnDContainer containerTabTitle={"TabC"} containerID={3} boxID={2}>
+                    <div>
+                        {"ChildrenComponentC"}
+                    </div>
+                </DnDContainer>            
+            </DnDLayout>                    
         )
     }
 }
