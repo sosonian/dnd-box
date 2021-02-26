@@ -1,6 +1,6 @@
 # dnd-box
 
-> Drag and Draw Box
+> Drag and Drop Box
 
 [![NPM](https://img.shields.io/npm/v/dnd-box.svg)](https://www.npmjs.com/package/dnd-box) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 

@@ -1,7 +1,7 @@
 {
   "name": "dnd-box",
   "version": "1.0.1",
-  "description": "Drag and Draw Box",
+  "description": "Drag and Drop Box",
   "author": "sosonian",
   "license": "MIT",
   "repository": "sosonian/dnd-box",
@@ -49,6 +49,11 @@
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+      "drag and drop",
+      "drag and drop sub-window",
+      "sub window"
   ],
   "dependencies": {
     "uuid": "^8.3.2"
