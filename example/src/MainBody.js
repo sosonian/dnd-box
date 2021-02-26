@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import { DnDContainer,DnDLayout } from 'dnd-box'
+import { DnDContainer, DnDBackgroundComponent, DnDLayout } from 'dnd-box'
 import './MainBody.css'
 
 class MainBody extends Component {
@@ -8,6 +8,7 @@ class MainBody extends Component {
         this.state={
             showContainer:null,
             testToggle:false,
+            testAreaToggle:false,
             scrollPosition:{
                 x:0,
                 y:0
@@ -22,7 +23,7 @@ class MainBody extends Component {
     showContainerClick=()=>{
         console.log("click event !")
         this.setState({
-            showContainer:[1,2,3,5]
+            showContainer:[1,2,3,4,5]
         },()=>{
             this.setState({
                 showContainer:null
@@ -57,6 +58,12 @@ class MainBody extends Component {
                 x:this.refDom.scrollLeft,
                 y:this.refDom.scrollTop
             }
+        })
+    }
+
+    testOnClick=()=>{
+        this.setState({
+            testAreaToggle:!this.state.testAreaToggle
         })
     }
 
@@ -113,8 +120,14 @@ class MainBody extends Component {
                 </div>
                 {
                     this.state.testToggle?
-                    <div style={{width:1900, height:800}} ref={(refDom)=>{this.refDom = refDom}}>
-                    <DnDLayout backgroundColor={'pink'} width={'100%'} height={'100%'} boxColor={''} boxHeaderColor={''} boxTabColor={''} boxHeaderHoverColor={''} boxTabHoverColor={''} boxTabSelectedColor={''} iconHoverColor={''} boxTabRadius={'0px 10px 0px 0px'} boxesSetting={boxesSetting} openContainer={this.state.showContainer} getBoxesState={this.getBoxesState} tabHeight={25}>
+                    <div style={{display:'flex', width:1900, height:800}} ref={(refDom)=>{this.refDom = refDom}}>
+                    
+                    <DnDLayout backgroundColor={'pink'} width={1900} height={800} boxColor={''} boxHeaderColor={''} boxTabColor={''} boxHeaderHoverColor={''} boxTabHoverColor={''} boxTabSelectedColor={''} iconHoverColor={''} boxTabRadius={'0px 10px 0px 0px'} boxesSetting={boxesSetting} openContainer={this.state.showContainer} getBoxesState={this.getBoxesState} tabHeight={25}>
+                        <DnDBackgroundComponent>
+                            <div style={{width:400, height:200, backgroundColor:this.state.testAreaToggle?"yellow":"blue"}} onClick={this.testOnClick}>
+                                {"Test Area"}
+                            </div>
+                        </DnDBackgroundComponent>
                         <DnDContainer containerTabTitle={"TabA"} containerID={1} boxID={'A'}>
                             {"TEST A Container"}
                         </DnDContainer>
@@ -128,7 +141,7 @@ class MainBody extends Component {
                                 {"GrandChildrenC"}
                             </div>
                         </DnDContainer>
-                        <DnDContainer containerTabTitle={"TabDeluxEdition"} containerID={3} boxID={'C'}>
+                        <DnDContainer containerTabTitle={"TabDeluxEdition"} containerID={4} boxID={'C'}>
                             <div className="temp1">
                                 {"GrandChildrenD"}
                             </div>
@@ -139,6 +152,7 @@ class MainBody extends Component {
                             </div>
                         </DnDContainer>
                     </DnDLayout>
+                    
                     </div>
                     :null
                 }

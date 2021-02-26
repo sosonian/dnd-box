@@ -581,9 +581,9 @@ class DnDBox extends Component {
         let containerWindow = {
             width:this.state.maxSizeToggle?this.props.layoutSize.width:this.state.divSize.width?this.state.divSize.width:this.props.size.width,
             height:this.state.maxSizeToggle?this.props.layoutSize.height:this.state.divSize.height?this.state.divSize.height:this.props.size.height,
-            position:this.state.maxSizeToggle?'relative':'absolute',
-            left:this.state.maxSizeToggle?0:this.state.position.x?this.state.position.x:this.props.initialPos.x,
-            top:this.state.maxSizeToggle?0:this.state.position.y?this.state.position.y:this.props.initialPos.y,
+            position:'absolute',
+            left:this.state.maxSizeToggle?this.props.offset.x:this.state.position.x?this.state.position.x:this.props.initialPos.x,
+            top:this.state.maxSizeToggle?this.props.offset.y:this.state.position.y?this.state.position.y:this.props.initialPos.y,
             zIndex:this.state.maxSizeToggle?100:this.props.zIndex,
             backgroundColor:this.props.boxCssSetting.boxColor,
             border:'2px solid',

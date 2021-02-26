@@ -71,8 +71,8 @@ class ShadowDnDBox extends Component{
         elem.style.position ="absolute"
         elem.style.width =this.props.boxSize.width+'px'
         elem.style.height =this.props.boxSize.height+'px'
-        elem.style.top = "0px"
-        elem.style.left = "0px"
+        elem.style.top = this.props.initialPos.y+this.props.boxTabHeight+'px'
+        elem.style.left = this.props.initialPos.x+'px'
         elem.style.zIndex = "-1"
         elem.style.border = '1px dotted'
         elem.style.borderColor = 'gray'
