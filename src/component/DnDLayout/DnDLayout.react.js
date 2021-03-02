@@ -56,7 +56,6 @@ class DnDLayout extends React.Component {
 
     componentDidMount(){
         this.loadContainerToBox(this.initialBoxesState())
-        //console.log(this.props.children[0].type.name)
     }
 
     componentDidUpdate(prevProps,prevState){
@@ -88,8 +87,6 @@ class DnDLayout extends React.Component {
     }
 
     initialBoxesState=()=>{
-        //console.log("initialBoxesState boxesSetting")
-        //console.log(this.props.boxesSetting)
         let output=[]
         if(this.props.boxesSetting  && this.props.boxesSetting.length > 0)
         {
@@ -142,8 +139,6 @@ class DnDLayout extends React.Component {
                     showingContainerSequence:0,
                     containerList:notSortArray
                 }
-
-                //console.log("outputObj : ", outputObj.position.x)
                 return outputObj
             })
         }
@@ -1199,7 +1194,6 @@ class DnDLayout extends React.Component {
     }
 
     render(){
-        //console.log("DnDLayout render")
         const layoutStyle = {
             width:this.props.width?this.props.width:'100%',
             height:this.props.height?this.props.height:'100%',
