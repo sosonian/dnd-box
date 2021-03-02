@@ -68,21 +68,7 @@ class DnDLayout extends React.Component {
     componentWillUnmount(){
         if(this.props.getBoxesState)
         {
-            let output = this.state.boxesState.map(box=>{
-                let containerArray = box.containerList.turnArray()
-                let outputBox = {
-                    boxID:box.boxID,
-                    position:box.position,
-                    size:box.size,
-                    zIndex:box.zIndex,
-                    showingContainerIndex:box.showingContainerSequence,
-                    showing:box.showing,
-                    containerArray:containerArray
-                }
-
-                return outputBox
-            })
-            this.props.getBoxesState(output)
+            this.props.getBoxesState(this.outputBoxState())
         }
     }
 
@@ -751,26 +737,22 @@ class DnDLayout extends React.Component {
                     let validBoxID = validBox.boxID
                     let originContainerList = this.state.boxesState.find(box=>box.boxID === this.state.tabDragging.oldBoxID).containerList.cloneList()
                     let newContainerList = validBox.containerList.cloneList()
-                    //let originContainerList = this.state.boxesState[this.state.tabDragging.oldBoxID-1].containerList.cloneList()
-                    //let newContainerList = this.state.boxesState[validBoxID-1].containerList.cloneList()
-                    //let newContainerList = new LinkedList()
-    
+                    
                     let newBoxZIndex = validBox.zIndex
 
                     let tempData = originContainerList.getAt(this.state.tabDragging.oldSequenceNumber)
                     originContainerList.removeAt(this.state.tabDragging.oldSequenceNumber)
                     newContainerList.insertLast(tempData)
-                    //let tempShowingUnitID = 0 
+
 
                     if(originContainerList.head)
                     {
-                        //console.log('originContainerList.head not null')
+
                         let tempBoxArray = []
                         this.state.boxesState.map(state=>{
                             if(state.boxID===this.state.tabDragging.oldBoxID)
                             { 
-                                //tempShowingUnitID = originContainerList.head.data.unitID
-                                //leftShowingUnitID = tempShowingUnitID
+
         
                                 let tempStateObj = {
                                     boxID:state.boxID,
@@ -785,9 +767,7 @@ class DnDLayout extends React.Component {
                             }
                             else if(state.boxID===validBoxID)
                             {
-                                //console.log("onTabDragging state.boxID === validBoxID")
-                                //console.log(msg.pos)
-                                //console.log(this.state.mousePos)
+
 
                                 let offset = {x:this.refLayout.getBoundingClientRect().left, y:this.refLayout.getBoundingClientRect().top}
                                 let layoutSize = {width:this.refLayout.offsetWidth, height:this.refLayout.offsetHeight}
@@ -856,6 +836,11 @@ class DnDLayout extends React.Component {
                     y:0
                 },
                 boxesState:output
+            },()=>{
+                if(this.props.getBoxesState)
+                {
+                    this.props.getBoxesState(this.outputBoxState())
+                }
             })
         }
     }
@@ -962,6 +947,24 @@ class DnDLayout extends React.Component {
                 })
             }
         }
+    }
+
+    outputBoxState=()=>{
+        let output = this.state.boxesState.map(box=>{
+            let containerArray = box.containerList.turnArray()
+            let outputBox = {
+                boxID:box.boxID,
+                position:box.position,
+                size:box.size,
+                zIndex:box.zIndex,
+                showingContainerIndex:box.showingContainerSequence,
+                showing:box.showing,
+                containerArray:containerArray
+            }
+
+            return outputBox
+        })
+        return output
     }
 
     boxOnClick=(msg)=>{
