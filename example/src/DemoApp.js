@@ -67,8 +67,9 @@ class DemoApp extends Component{
         if(preState.frontViewSize !== this.state.frontViewSize && this.frontView)
         {
             //console.log(this.frontView.parentElement)
-            this.renderer2.setSize(this.state.frontViewSize.w-1, this.state.frontViewSize.h-1)
-            this.frontView.appendChild( this.renderer2.domElement )
+            //this.renderer2.setSize(this.state.frontViewSize.w-1, this.state.frontViewSize.h-1)
+            //this.frontView.appendChild( this.renderer2.domElement )
+            this.resizeFrontView()
         }
     }
 
@@ -81,6 +82,11 @@ class DemoApp extends Component{
     //     this.stats.domElement.style.position = 'absolute'  
     //     this.mainBody.appendChild(this.stats.domElement)     
     // }
+
+    resizeFrontView=()=>{
+        this.renderer2.setSize(this.state.frontViewSize.w-1, this.state.frontViewSize.h-1)
+        this.frontView.appendChild( this.renderer2.domElement )
+    }
 
     animate=()=>{
         if(this.frontView)
@@ -103,7 +109,6 @@ class DemoApp extends Component{
                     h:null
                 }
             })
-
         }
 
         //this.stats.begin();
@@ -138,8 +143,14 @@ class DemoApp extends Component{
         console.log("frontView be clicked !")
     }
 
+    getBoxesState=(msg)=>{
+        if(this.frontView)
+        {
+            this.resizeFrontView()
+        }
+    }
+
     render(){
-       
         console.log("DemoApp render")
         let boxesSetting=[
             {
@@ -181,7 +192,7 @@ class DemoApp extends Component{
 
         return(
             <div ref={(mainBody)=>{this.mainBody = mainBody}} style={{border:"1px solid black"}}>
-                <DnDLayout backgroundColor={'pink'} width={1920} height={800} boxColor={''} boxHeaderColor={''} boxTabColor={''} boxHeaderHoverColor={''} boxTabHoverColor={''} boxTabSelectedColor={''} iconHoverColor={''} boxTabRadius={'0px 10px 0px 0px'} boxesSetting={boxesSetting} openContainer={this.state.showContainer}  tabHeight={25}>
+                <DnDLayout backgroundColor={'pink'} width={1920} height={800} boxColor={''} boxHeaderColor={''} boxTabColor={''} boxHeaderHoverColor={''} boxTabHoverColor={''} boxTabSelectedColor={''} iconHoverColor={''} boxTabRadius={'0px 10px 0px 0px'} boxesSetting={boxesSetting} openContainer={this.state.showContainer}  tabHeight={25} getBoxesState={this.getBoxesState}>
                     <DnDBackgroundComponent>
                         <div onClick={this.onClick} ref={(mount) => { this.mount = mount }}>
                         </div>
