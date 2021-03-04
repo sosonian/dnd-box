@@ -334,7 +334,7 @@ class DemoApp extends Component{
                 selectedObjInfo:obj
             })
         }
-        console.log(result)
+        //console.log(result)
     }
 
     detectObjectSelectedOrNot=(e)=>{
@@ -373,10 +373,6 @@ class DemoApp extends Component{
         {
             object3D.material.color.set(0x0000ff)
         }
-    }
-
-    sideOnClick=()=>{
-        console.log("frontView be clicked !")
     }
 
     getBoxesState=(msg)=>{
@@ -469,7 +465,7 @@ class DemoApp extends Component{
                         <div style={{width:'100%',height:'100%',overflow:'hidden'}} ref={(topView) => { this.topView = topView }}>                                 
                         </div>
                     </DnDContainer>
-                    <DnDContainer containerTabTitle={"Rotation Speed"} containerID={3} boxID={'D'}>             
+                    <DnDContainer containerTabTitle={"Rotation Speed"} containerID={1} boxID={'D'}>             
                         <RotationMenu rotationMesh1={this.state.rotationMesh1} rotationMesh2={this.state.rotationMesh2} returnRotation={this.returnRotation}/>          
                     </DnDContainer>
                     <DnDContainer containerTabTitle={"Obj Info"} containerID={5} boxID={'D'}>

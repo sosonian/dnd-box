@@ -176,12 +176,14 @@ class DnDLayout extends React.Component {
                         }
                         else
                         {
-                            id = uuidv4()
+                            //id = uuidv4()
+                            id = null
                         }
                     }
                     else
                     {
-                        id = uuidv4()
+                        //id = uuidv4()
+                        id = null
                     }
                 
                     let outputObj = {
@@ -189,9 +191,13 @@ class DnDLayout extends React.Component {
                         tab:child.props.containerTabTitle?child.props.containerTabTitle:"Container",
                         boxID:child.props.boxID?child.props.boxID:null,
                         sequenceNumber:child.props.sequenceNumber?child.props.sequenceNumber:null,
-                        domObj:child
+                        //domObj:child
                     }
-                    output.push(outputObj)
+
+                    if(outputObj.containerID)
+                    {
+                        output.push(outputObj)
+                    }               
                 }
             })
             return output
@@ -1000,7 +1006,7 @@ class DnDLayout extends React.Component {
 
             return (
                 this.state.boxesState.map(box=>box.showing?
-                    (<DnDBox key={box.boxID} boxID={box.boxID} initialPos={box.position} mousePos={this.state.mousePos} size={box.size} boxCssSetting={boxCssSetting} containerList={box.containerList} showingContainerSequence={box.showingContainerSequence} offset={offset} layoutSize={layoutSize} scrollPos={this.state.scrollPos} zIndex={box.zIndex} boxShowing={box.showing} anyBoxDragging={this.state.boxDragging.status && this.state.boxDragging.boxID !== box.boxID?true:false} boxDragging={this.onBoxDragging} boxExtending={this.onBoxExtending} onTabDragging={this.onTabDragging} tabDraggingBooling={this.state.tabDragging.status} getTabNewSequenceNumber={this.getTabNewSequenceNumber} tabNewBoxID={this.tabNewBoxID} boxOnClick={this.boxOnClick} boxHiding={this.boxHiding} boxTabHeight={this.verifyTabHeight()}>{box.containerList.getAt(box.showingContainerSequence)?box.containerList.getAt(box.showingContainerSequence).domObj:null}</DnDBox>)
+                    (<DnDBox key={box.boxID} boxID={box.boxID} initialPos={box.position} mousePos={this.state.mousePos} size={box.size} boxCssSetting={boxCssSetting} containerList={box.containerList} showingContainerSequence={box.showingContainerSequence} offset={offset} layoutSize={layoutSize} scrollPos={this.state.scrollPos} zIndex={box.zIndex} boxShowing={box.showing} anyBoxDragging={this.state.boxDragging.status && this.state.boxDragging.boxID !== box.boxID?true:false} boxDragging={this.onBoxDragging} boxExtending={this.onBoxExtending} onTabDragging={this.onTabDragging} tabDraggingBooling={this.state.tabDragging.status} getTabNewSequenceNumber={this.getTabNewSequenceNumber} tabNewBoxID={this.tabNewBoxID} boxOnClick={this.boxOnClick} boxHiding={this.boxHiding} boxTabHeight={this.verifyTabHeight()}>{this.updateChildren(box)}</DnDBox>)
                     :
                     null
                 )
@@ -1010,6 +1016,23 @@ class DnDLayout extends React.Component {
         {
             return null
         }
+    }
+
+    updateChildren=(box)=>{
+        let output = null
+        let tempObj = box.containerList.getAt(box.showingContainerSequence)
+        if(tempObj)
+        {
+            output = this.props.children.find(child=>
+                child.type.name === "DnDContainer" && child.props.containerID === tempObj.containerID       
+            )
+        }
+        else
+        {
+            output = null
+        }
+  
+        return output
     }
 
     appendShadowDnDBox=()=>{
@@ -1198,7 +1221,7 @@ class DnDLayout extends React.Component {
     }
 
     render(){
-        //console.log("DnDLayout render")
+        console.log("DnDLayout render")
         const layoutStyle = {
             width:this.props.width?this.props.width:'100%',
             height:this.props.height?this.props.height:'100%',

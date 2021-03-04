@@ -587,7 +587,7 @@ class DnDBox extends Component {
     render() {    
         //console.log('box render boxID  : ',this.props.boxID)
         //console.log(this.props.children)
-        console.log(this.props.children)
+        //console.log(this.props.children)
         let containerWindow = {
             width:this.state.maxSizeToggle?this.props.layoutSize.width:this.state.divSize.width?this.state.divSize.width:this.props.size.width,
             height:this.state.maxSizeToggle?this.props.layoutSize.height:this.state.divSize.height?this.state.divSize.height:this.props.size.height,

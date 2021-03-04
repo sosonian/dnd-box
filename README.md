@@ -172,7 +172,13 @@ Array of string or array of number, the list of ID of DnDContainer which would b
 輸入值是字串陣列或數字陣列, 陣列中的值為功能區域(DnDContainer)的ID. 輸入後, 將顯示陣列中所列的功能區域.
 
 ### getBoxesState
+
+under version 1.0.3:
 Callback, when DnDLayout is unmounted, it would send back an array of the state of box. Attributes of box state:
+
+version 1.0.4:
+Callback, when dragging of tab of container complete, it would send back an array of the state of box. Attributes of box state:
+
 
 * boxID : the ID of box, string or number.
 * showing : toggle to show box or not, booling. True for showing the box, false to remove the box.
@@ -190,7 +196,11 @@ Callback, when DnDLayout is unmounted, it would send back an array of the state 
     domObj : the child component of container, object.
 * showingContainerIndex : index of container (tab) belongs to containerArray which is selected, number.
 
+1.0.3 之前之版本:
 輸出回傳, 當 DnDLayout unmounted 時, 會回傳一個有所有子視窗狀態的array. 子視窗狀態的屬性:
+
+1.0.4 版本
+當子視窗的標籤拖曳動作完成後，會回傳一個有所有子視窗狀態的arrayㄡ
 
 * boxID : 子視窗ID, 字串或數字.
 * showing : 子視窗顯示與否, 布林. 數值是true的話顯示子視窗, 數值是false的話移除子視窗.
@@ -221,9 +231,18 @@ String, the title of container.
 字串，功能區塊的標籤名稱
 
 ### containerID
+
+under version 1.0.3:
 String or number, the ID of container. Input could be number or string, but must be unique. If ID is duplicate, second one would be assigned a new unique ID automatically (use uuidv4), and so is if ID is not given.
 
+version 1.0.4:
+String or number, the ID of container. Input could be number or string, but must be unique. If ID is duplicate or not given, this container would be omited.
+
+1.0.3 以前之版本:
 輸入值是字串或數字, 其為功能區塊的ID. 但值必須是唯一值, 不與其他功能區塊的ID重複. 如果重複, 重複的containerID會被自動指派一個新的唯一值. 如果ID是空值, 也會被自動指派一個新的唯一值 (使用 uuidv4).
+
+1.0.4 版本:
+輸入值是字串或數字, 其為功能區塊的ID. 但值必須是唯一值, 不與其他功能區塊的ID重複. 如果重複, 子視窗 (container) 會被忽略不會出現.
 
 ### boxID
 String or number, the ID of box which this container belongs to.
