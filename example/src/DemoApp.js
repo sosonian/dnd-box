@@ -465,7 +465,7 @@ class DemoApp extends Component{
                         <div style={{width:'100%',height:'100%',overflow:'hidden'}} ref={(topView) => { this.topView = topView }}>                                 
                         </div>
                     </DnDContainer>
-                    <DnDContainer containerTabTitle={"Rotation Speed"} containerID={1} boxID={'D'}>             
+                    <DnDContainer containerTabTitle={"Rotation Speed"} containerID={4} boxID={'D'}>             
                         <RotationMenu rotationMesh1={this.state.rotationMesh1} rotationMesh2={this.state.rotationMesh2} returnRotation={this.returnRotation}/>          
                     </DnDContainer>
                     <DnDContainer containerTabTitle={"Obj Info"} containerID={5} boxID={'D'}>
