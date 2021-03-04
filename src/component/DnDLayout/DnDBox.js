@@ -563,11 +563,20 @@ class DnDBox extends Component {
     }
 
     boxOnClick=(e)=>{
+        e.stopPropagation()
         let msg = {
             boxID:this.props.boxID,
             zIndex:this.props.zIndex
         }
         this.props.boxOnClick(msg)
+    }
+
+    boxOnMouseDown=(e)=>{
+        e.stopPropagation()
+    }
+
+    boxOnMouseUp=(e)=>{
+        e.stopPropagation()
     }
 
     falseEvent=(e)=>{
@@ -576,8 +585,9 @@ class DnDBox extends Component {
     }
 
     render() {    
-        //console.log('box render boxID  : ',this.props.boxID)
-        //console.log(this.props.initialPos)
+        console.log('box render boxID  : ',this.props.boxID)
+        //console.log(this.props.children)
+        console.log(this.props.children.props.children)
         let containerWindow = {
             width:this.state.maxSizeToggle?this.props.layoutSize.width:this.state.divSize.width?this.state.divSize.width:this.props.size.width,
             height:this.state.maxSizeToggle?this.props.layoutSize.height:this.state.divSize.height?this.state.divSize.height:this.props.size.height,
@@ -657,7 +667,7 @@ class DnDBox extends Component {
                 <div style={extendFunctionAreaStyle} onMouseDown={this.extendAreaMouseDown}  onMouseUp={this.extendAreaMouseUp}>
                     &#9499;
                 </div>  
-                <div style={{width:'100%',height:'100%'}} onClick={this.boxOnClick}>            
+                <div style={{width:'100%', height:'100%', overflow:'auto'}} onMouseDown={this.boxOnMouseDown} onMouseUp={this.boxOnMouseUp} onClick={this.boxOnClick}>            
                     {this.props.children}
                 </div>            
             </div>

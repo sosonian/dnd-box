@@ -1198,6 +1198,7 @@ class DnDLayout extends React.Component {
     }
 
     render(){
+        //console.log("DnDLayout render")
         const layoutStyle = {
             width:this.props.width?this.props.width:'100%',
             height:this.props.height?this.props.height:'100%',
