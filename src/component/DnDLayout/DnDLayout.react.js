@@ -1207,7 +1207,7 @@ class DnDLayout extends React.Component {
            
                 <div style={layoutStyle} ref={(refLayout)=>{this.refLayout = refLayout}} onMouseMove={this.onMouseMove} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave} onDragOver={this.onDragOver} onDrop={this.onDrop} >
                     {this.appendShadowDnDBox()}
-                    {this.appendBackgroundDom()}
+                  
                     {this.createBox()}
                 </div>
            

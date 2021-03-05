@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as THREE from 'three';
 import orbControls from './OrbitControls';
 //import Stats from 'stats.js';
-import {DnDContainer, DnDBackgroundComponent, DnDLayout} from 'dnd-box'
+import {DnDContainer, DnDLayout} from 'dnd-box'
 import OrbitControls from './OrbitControls';
 import RotationMenu from './RotationMenu'
 import SelectedObjInfo from './SelectedObjInfo'
@@ -59,7 +59,7 @@ class DemoApp extends Component{
         this.renderer = new THREE.WebGLRenderer();
 		this.renderer.setPixelRatio( window.devicePixelRatio );
 		this.renderer.setSize( 1920, 800);
-		this.mount.appendChild( this.renderer.domElement );
+		this.mainBody.appendChild( this.renderer.domElement );
         this.sceneGrid = new THREE.GridHelper(50,50)
         this.scene.add(this.sceneGrid)
 
@@ -449,10 +449,6 @@ class DemoApp extends Component{
         return(
             <div ref={(mainBody)=>{this.mainBody = mainBody}} style={{border:"1px solid black"}}  onMouseDown={this.threeDLayerMouseDown}>
                 <DnDLayout backgroundColor={'pink'} width={1920} height={800} boxColor={''} boxHeaderColor={''} boxTabColor={''} boxHeaderHoverColor={''} boxTabHoverColor={''} boxTabSelectedColor={''} iconHoverColor={''} boxTabRadius={'0px 10px 0px 0px'} boxesSetting={boxesSetting} openContainer={this.state.showContainer}  tabHeight={25} getBoxesState={this.getBoxesState}>
-                    <DnDBackgroundComponent>
-                        <div ref={(mount) => { this.mount = mount }}>
-                        </div>
-                    </DnDBackgroundComponent>
                     <DnDContainer containerTabTitle={"Front View"} containerID={1} boxID={'A'}>
                         <div style={{width:'100%',height:'100%',overflow:'hidden'}} ref={(frontView) => { this.frontView = frontView }}>
                         </div>
