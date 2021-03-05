@@ -1201,6 +1201,18 @@ class DnDLayout extends React.Component {
     onDrop=(e)=>{
     }
 
+    appendBackgroundDom=()=>{
+        let dom = this.props.children.find(child=>child.type.name === "DnDBackgroundComponent")
+        if(dom)
+        {
+            return <React.Fragment>{dom.props.children}</React.Fragment>
+        }
+        else
+        {
+            return null
+        }
+    }
+
     render(){
         //console.log("DnDLayout render")
         const layoutStyle = {
@@ -1214,6 +1226,7 @@ class DnDLayout extends React.Component {
            
                 <div style={layoutStyle} ref={(refLayout)=>{this.refLayout = refLayout}} onMouseMove={this.onMouseMove} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave} onDragOver={this.onDragOver} onDrop={this.onDrop} >
                     {this.appendShadowDnDBox()}
+                    {this.appendBackgroundDom()}
                     {this.createBox()}
                 </div>
            
