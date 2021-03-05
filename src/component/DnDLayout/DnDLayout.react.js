@@ -209,7 +209,7 @@ class DnDLayout extends React.Component {
     }
 
     loadContainerToBox=(boxesState)=>{
-        let tempArray
+        //let tempArray
         let tempContainerState = this.initialContainerState()
         let tempBoxesIDArray = boxesState.map(box=>{
             return box.boxID
