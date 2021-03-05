@@ -87,6 +87,8 @@ class DnDLayout extends React.Component {
     }
 
     initialBoxesState=()=>{
+        //console.log("initialBoxesState boxesSetting")
+        //console.log(this.props.boxesSetting)
         let output=[]
         if(this.props.boxesSetting  && this.props.boxesSetting.length > 0)
         {
@@ -113,12 +115,32 @@ class DnDLayout extends React.Component {
                 }
             })
 
+            // boxIDUniqueArray.sort((a,b)=>{
+            //     return a.boxID - b.boxID
+            // })
+
+            // let index = 0
+
             boxIDUndefinedOrDuplicatedArray.forEach(box=>{
                 let newID = uuidv4()
                 box.boxID = newID
                 boxIDUniqueArray.push(box)
             })
-                     
+            
+
+            // while (boxIDUndefinedOrDuplicatedArray.length > 0)
+            // {
+            //     if(index+1 !== boxIDUniqueArray[index].boxID)
+            //     {
+            //         let tempObj = boxIDUndefinedOrDuplicatedArray[0]
+            //         boxIDUndefinedOrDuplicatedArray.shift()
+            //         tempObj.boxID = index+1
+            //         boxIDUniqueArray.splice(index,0,tempObj)
+            //     }
+
+            //     index ++
+            // }
+
             output = boxIDUniqueArray.map((box,index)=>{
                 let notSortArray = []
 
@@ -139,6 +161,8 @@ class DnDLayout extends React.Component {
                     showingContainerSequence:0,
                     containerList:notSortArray
                 }
+
+                //console.log("outputObj : ", outputObj.position.x)
                 return outputObj
             })
         }
@@ -175,38 +199,34 @@ class DnDLayout extends React.Component {
     initialContainerState=()=>{
         if(this.props.children && this.props.children.length >0)
         {
-            let output = []
             let uniqueContainerIDArray = []
-            this.props.children.forEach((child,index)=>{
-                if(child.type.name === "DnDContainer")
+            let output = this.props.children.map((child,index)=>{
+                let id
+                if(child.props.containerID)
                 {
-                    let id
-                    if(child.props.containerID)
+                    if(uniqueContainerIDArray.indexOf(child.props.containerID) === -1)
                     {
-                        if(uniqueContainerIDArray.indexOf(child.props.containerID) === -1)
-                        {
-                            uniqueContainerIDArray.push(child.props.containerID)
-                            id = child.props.containerID
-                        }
-                        else
-                        {
-                            id = uuidv4()
-                        }
+                        uniqueContainerIDArray.push(child.props.containerID)
+                        id = child.props.containerID
                     }
                     else
                     {
                         id = uuidv4()
                     }
-                
-                    let outputObj = {
-                        containerID: id,
-                        tab:child.props.containerTabTitle?child.props.containerTabTitle:"Container",
-                        boxID:child.props.boxID?child.props.boxID:null,
-                        sequenceNumber:child.props.sequenceNumber?child.props.sequenceNumber:null,
-                        domObj:child
-                    }
-                    output.push(outputObj)
                 }
+                else
+                {
+                    id = uuidv4()
+                }
+                
+                let outputObj = {
+                    containerID: id,
+                    tab:child.props.containerTabTitle?child.props.containerTabTitle:"Container",
+                    boxID:child.props.boxID?child.props.boxID:null,
+                    sequenceNumber:child.props.sequenceNumber?child.props.sequenceNumber:null,
+                    domObj:child
+                }
+                return outputObj
             })
             return output
         }
@@ -217,7 +237,6 @@ class DnDLayout extends React.Component {
     }
 
     loadContainerToBox=(boxesState)=>{
-        let tempArray
         let tempContainerState = this.initialContainerState()
         let tempBoxesIDArray = boxesState.map(box=>{
             return box.boxID
@@ -1081,18 +1100,6 @@ class DnDLayout extends React.Component {
         }
     }
 
-    appendBackgroundDom=()=>{
-        let dom = this.props.children.find(child=>child.type.name === "DnDBackgroundComponent")
-        if(dom)
-        {
-            return <React.Fragment>{dom.props.children}</React.Fragment>
-        }
-        else
-        {
-            return null
-        }
-    }
-
     //The reason that get mouse position (x,y) from mouseMove event of Layout but not from individual Box => to deal with the issue that moving mouse fast and big, the pointer may out the range of Box.
     //But beware of the unnecessary re-render of other Box element
 
@@ -1195,19 +1202,18 @@ class DnDLayout extends React.Component {
     }
 
     render(){
+        //console.log("DnDLayout render")
         const layoutStyle = {
             width:this.props.width?this.props.width:'100%',
             height:this.props.height?this.props.height:'100%',
             backgroundColor:this.props.backgroundColor?this.props.backgroundColor:"white",
-            overflow:'hidden',
-            position:this.props.position?this.props.position:"static"
+            overflow:'hidden'
         }
 
         return(
            
                 <div style={layoutStyle} ref={(refLayout)=>{this.refLayout = refLayout}} onMouseMove={this.onMouseMove} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave} onDragOver={this.onDragOver} onDrop={this.onDrop} >
                     {this.appendShadowDnDBox()}
-                  
                     {this.createBox()}
                 </div>
            
