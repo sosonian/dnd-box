@@ -1112,7 +1112,7 @@ class DnDLayout extends React.Component {
         let dom = this.props.children.find(child=>child.props.dndType === "DnDBackground")
         if(dom)
         {
-            return <React.Fragment>{dom}</React.Fragment>
+            return <React.Fragment>{dom.prop.children}</React.Fragment>
         }
         else
         {
