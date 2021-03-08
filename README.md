@@ -254,7 +254,9 @@ dndType 需輸入子串，且值必須是 'DnDBackground', 如果值不符合或
 
 
 
-## DnDContainer Props
+## DnDContainer
+
+It's the content of box (sub-window) of DnDLayout. Every box
 
 List of Props of DnDContainer
 
