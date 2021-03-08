@@ -38,6 +38,8 @@ npm install --save dnd-box
 
 ## Usage
 
+使用方式
+
 ```jsx
 import React, { Component } from 'react'
 import { DnDLayout, DnDBackground, DnDContainer } from 'dnd-box'
@@ -59,7 +61,9 @@ class DemoApp extends Component {
         
         return (
             <DnDLayout width={1800} height={800}>
-                <DnD>
+                <DnDBackground dndType={'DnDBackground'}>
+                    {"This is background of layout"}
+                <DnDBackground>
                 <DnDContainer containerTabTitle={"TabA"} containerID={1} boxID={1}>
                     <div>
                         {"ChildrenComponentA"}
