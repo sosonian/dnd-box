@@ -164,7 +164,7 @@ class DnDLayout extends React.Component {
             let output = []
             let uniqueContainerIDArray = []
             this.props.children.forEach((child,index)=>{
-                if(child.type.name === "DnDContainer")
+                if(child.props.dndType !== "DnDContainer")
                 {
                     let id
                     if(child.props.containerID)
@@ -1108,10 +1108,11 @@ class DnDLayout extends React.Component {
     }
 
     appendBackgroundDom=()=>{
-        let dom = this.props.children.find(child=>child.type.name === "DnDBackgroundComponent")
+        //console.log(this.props.children)
+        let dom = this.props.children.find(child=>child.props.dndType === "DnDBackground")
         if(dom)
         {
-            return <React.Fragment>{dom.props.children}</React.Fragment>
+            return <React.Fragment>{dom}</React.Fragment>
         }
         else
         {
