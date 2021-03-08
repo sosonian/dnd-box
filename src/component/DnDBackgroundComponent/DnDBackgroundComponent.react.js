@@ -1,6 +1,7 @@
 import * as React from "react";
 
 const DnDBackgroundComponent = (props) =>{
+    
     return (
         <React.Fragment>   
             {props.children}
