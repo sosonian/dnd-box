@@ -68,27 +68,11 @@ class DnDLayout extends React.Component {
     componentWillUnmount(){
         if(this.props.getBoxesState)
         {
-            let output = this.state.boxesState.map(box=>{
-                let containerArray = box.containerList.turnArray()
-                let outputBox = {
-                    boxID:box.boxID,
-                    position:box.position,
-                    size:box.size,
-                    zIndex:box.zIndex,
-                    showingContainerIndex:box.showingContainerSequence,
-                    showing:box.showing,
-                    containerArray:containerArray
-                }
-
-                return outputBox
-            })
-            this.props.getBoxesState(output)
+            this.props.getBoxesState(this.outputBoxState())
         }
     }
 
     initialBoxesState=()=>{
-        //console.log("initialBoxesState boxesSetting")
-        //console.log(this.props.boxesSetting)
         let output=[]
         if(this.props.boxesSetting  && this.props.boxesSetting.length > 0)
         {
@@ -115,32 +99,12 @@ class DnDLayout extends React.Component {
                 }
             })
 
-            // boxIDUniqueArray.sort((a,b)=>{
-            //     return a.boxID - b.boxID
-            // })
-
-            // let index = 0
-
             boxIDUndefinedOrDuplicatedArray.forEach(box=>{
                 let newID = uuidv4()
                 box.boxID = newID
                 boxIDUniqueArray.push(box)
             })
-            
-
-            // while (boxIDUndefinedOrDuplicatedArray.length > 0)
-            // {
-            //     if(index+1 !== boxIDUniqueArray[index].boxID)
-            //     {
-            //         let tempObj = boxIDUndefinedOrDuplicatedArray[0]
-            //         boxIDUndefinedOrDuplicatedArray.shift()
-            //         tempObj.boxID = index+1
-            //         boxIDUniqueArray.splice(index,0,tempObj)
-            //     }
-
-            //     index ++
-            // }
-
+                     
             output = boxIDUniqueArray.map((box,index)=>{
                 let notSortArray = []
 
@@ -161,8 +125,6 @@ class DnDLayout extends React.Component {
                     showingContainerSequence:0,
                     containerList:notSortArray
                 }
-
-                //console.log("outputObj : ", outputObj.position.x)
                 return outputObj
             })
         }
@@ -199,34 +161,44 @@ class DnDLayout extends React.Component {
     initialContainerState=()=>{
         if(this.props.children && this.props.children.length >0)
         {
+            let output = []
             let uniqueContainerIDArray = []
-            let output = this.props.children.map((child,index)=>{
-                let id
-                if(child.props.containerID)
+            this.props.children.forEach((child,index)=>{
+                if(child.type.name === "DnDContainer")
                 {
-                    if(uniqueContainerIDArray.indexOf(child.props.containerID) === -1)
+                    let id
+                    if(child.props.containerID)
                     {
-                        uniqueContainerIDArray.push(child.props.containerID)
-                        id = child.props.containerID
+                        if(uniqueContainerIDArray.indexOf(child.props.containerID) === -1)
+                        {
+                            uniqueContainerIDArray.push(child.props.containerID)
+                            id = child.props.containerID
+                        }
+                        else
+                        {
+                            //id = uuidv4()
+                            id = null
+                        }
                     }
                     else
                     {
-                        id = uuidv4()
+                        //id = uuidv4()
+                        id = null
                     }
-                }
-                else
-                {
-                    id = uuidv4()
-                }
                 
-                let outputObj = {
-                    containerID: id,
-                    tab:child.props.containerTabTitle?child.props.containerTabTitle:"Container",
-                    boxID:child.props.boxID?child.props.boxID:null,
-                    sequenceNumber:child.props.sequenceNumber?child.props.sequenceNumber:null,
-                    domObj:child
+                    let outputObj = {
+                        containerID: id,
+                        tab:child.props.containerTabTitle?child.props.containerTabTitle:"Container",
+                        boxID:child.props.boxID?child.props.boxID:null,
+                        sequenceNumber:child.props.sequenceNumber?child.props.sequenceNumber:null,
+                        //domObj:child
+                    }
+
+                    if(outputObj.containerID)
+                    {
+                        output.push(outputObj)
+                    }               
                 }
-                return outputObj
             })
             return output
         }
@@ -237,6 +209,7 @@ class DnDLayout extends React.Component {
     }
 
     loadContainerToBox=(boxesState)=>{
+        let tempArray
         let tempContainerState = this.initialContainerState()
         let tempBoxesIDArray = boxesState.map(box=>{
             return box.boxID
@@ -770,26 +743,22 @@ class DnDLayout extends React.Component {
                     let validBoxID = validBox.boxID
                     let originContainerList = this.state.boxesState.find(box=>box.boxID === this.state.tabDragging.oldBoxID).containerList.cloneList()
                     let newContainerList = validBox.containerList.cloneList()
-                    //let originContainerList = this.state.boxesState[this.state.tabDragging.oldBoxID-1].containerList.cloneList()
-                    //let newContainerList = this.state.boxesState[validBoxID-1].containerList.cloneList()
-                    //let newContainerList = new LinkedList()
-    
+                    
                     let newBoxZIndex = validBox.zIndex
 
                     let tempData = originContainerList.getAt(this.state.tabDragging.oldSequenceNumber)
                     originContainerList.removeAt(this.state.tabDragging.oldSequenceNumber)
                     newContainerList.insertLast(tempData)
-                    //let tempShowingUnitID = 0 
+
 
                     if(originContainerList.head)
                     {
-                        //console.log('originContainerList.head not null')
+
                         let tempBoxArray = []
                         this.state.boxesState.map(state=>{
                             if(state.boxID===this.state.tabDragging.oldBoxID)
                             { 
-                                //tempShowingUnitID = originContainerList.head.data.unitID
-                                //leftShowingUnitID = tempShowingUnitID
+
         
                                 let tempStateObj = {
                                     boxID:state.boxID,
@@ -804,9 +773,7 @@ class DnDLayout extends React.Component {
                             }
                             else if(state.boxID===validBoxID)
                             {
-                                //console.log("onTabDragging state.boxID === validBoxID")
-                                //console.log(msg.pos)
-                                //console.log(this.state.mousePos)
+
 
                                 let offset = {x:this.refLayout.getBoundingClientRect().left, y:this.refLayout.getBoundingClientRect().top}
                                 let layoutSize = {width:this.refLayout.offsetWidth, height:this.refLayout.offsetHeight}
@@ -875,6 +842,11 @@ class DnDLayout extends React.Component {
                     y:0
                 },
                 boxesState:output
+            },()=>{
+                if(this.props.getBoxesState)
+                {
+                    this.props.getBoxesState(this.outputBoxState())
+                }
             })
         }
     }
@@ -983,6 +955,24 @@ class DnDLayout extends React.Component {
         }
     }
 
+    outputBoxState=()=>{
+        let output = this.state.boxesState.map(box=>{
+            let containerArray = box.containerList.turnArray()
+            let outputBox = {
+                boxID:box.boxID,
+                position:box.position,
+                size:box.size,
+                zIndex:box.zIndex,
+                showingContainerIndex:box.showingContainerSequence,
+                showing:box.showing,
+                containerArray:containerArray
+            }
+
+            return outputBox
+        })
+        return output
+    }
+
     boxOnClick=(msg)=>{
         this.setState({
             boxesState:this.setNewBoxZIndex(msg)
@@ -1016,7 +1006,7 @@ class DnDLayout extends React.Component {
 
             return (
                 this.state.boxesState.map(box=>box.showing?
-                    (<DnDBox key={box.boxID} boxID={box.boxID} initialPos={box.position} mousePos={this.state.mousePos} size={box.size} boxCssSetting={boxCssSetting} containerList={box.containerList} showingContainerSequence={box.showingContainerSequence} offset={offset} layoutSize={layoutSize} scrollPos={this.state.scrollPos} zIndex={box.zIndex} boxShowing={box.showing} anyBoxDragging={this.state.boxDragging.status && this.state.boxDragging.boxID !== box.boxID?true:false} boxDragging={this.onBoxDragging} boxExtending={this.onBoxExtending} onTabDragging={this.onTabDragging} tabDraggingBooling={this.state.tabDragging.status} getTabNewSequenceNumber={this.getTabNewSequenceNumber} tabNewBoxID={this.tabNewBoxID} boxOnClick={this.boxOnClick} boxHiding={this.boxHiding} boxTabHeight={this.verifyTabHeight()}>{box.containerList.getAt(box.showingContainerSequence)?box.containerList.getAt(box.showingContainerSequence).domObj:null}</DnDBox>)
+                    (<DnDBox key={box.boxID} boxID={box.boxID} initialPos={box.position} mousePos={this.state.mousePos} size={box.size} boxCssSetting={boxCssSetting} containerList={box.containerList} showingContainerSequence={box.showingContainerSequence} offset={offset} layoutSize={layoutSize} scrollPos={this.state.scrollPos} zIndex={box.zIndex} boxShowing={box.showing} anyBoxDragging={this.state.boxDragging.status && this.state.boxDragging.boxID !== box.boxID?true:false} boxDragging={this.onBoxDragging} boxExtending={this.onBoxExtending} onTabDragging={this.onTabDragging} tabDraggingBooling={this.state.tabDragging.status} getTabNewSequenceNumber={this.getTabNewSequenceNumber} tabNewBoxID={this.tabNewBoxID} boxOnClick={this.boxOnClick} boxHiding={this.boxHiding} boxTabHeight={this.verifyTabHeight()}>{this.updateChildren(box)}</DnDBox>)
                     :
                     null
                 )
@@ -1026,6 +1016,23 @@ class DnDLayout extends React.Component {
         {
             return null
         }
+    }
+
+    updateChildren=(box)=>{
+        let output = null
+        let tempObj = box.containerList.getAt(box.showingContainerSequence)
+        if(tempObj)
+        {
+            output = this.props.children.find(child=>
+                child.type.name === "DnDContainer" && child.props.containerID === tempObj.containerID       
+            )
+        }
+        else
+        {
+            output = null
+        }
+  
+        return output
     }
 
     appendShadowDnDBox=()=>{
@@ -1097,6 +1104,18 @@ class DnDLayout extends React.Component {
                 }
                 boxesStateToken.push(boxObj)
             })   
+        }
+    }
+
+    appendBackgroundDom=()=>{
+        let dom = this.props.children.find(child=>child.type.name === "DnDBackgroundComponent")
+        if(dom)
+        {
+            return <React.Fragment>{dom.props.children}</React.Fragment>
+        }
+        else
+        {
+            return null
         }
     }
 
@@ -1201,27 +1220,14 @@ class DnDLayout extends React.Component {
     onDrop=(e)=>{
     }
 
-    appendBackgroundDom=()=>{
-        let dom = this.props.children.find(child=>child.props.dndType === "dndBackground")
-        if(dom)
-        {
-            console.log(dom)
-            return <div style={{width:this.props.width?this.props.width:'100%',height:this.props.height?this.props.height:'100%'}}>{dom.props.children}</div>
-        }
-        else
-        {
-            console.log("A2")
-            return null
-        }
-    }
-
     render(){
-        //console.log("DnDLayout render")
+        console.log("DnDLayout render")
         const layoutStyle = {
             width:this.props.width?this.props.width:'100%',
             height:this.props.height?this.props.height:'100%',
             backgroundColor:this.props.backgroundColor?this.props.backgroundColor:"white",
-            overflow:'hidden'
+            overflow:'hidden',
+            position:this.props.position?this.props.position:"static"
         }
 
         return(

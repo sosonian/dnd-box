@@ -7,8 +7,12 @@ const DnDContainer = (props) =>{
         overflow:'auto'
     }
     return (
-        <React.Fragment><div style={boxStyle}>{props.children}</div></React.Fragment>
+        <React.Fragment>      
+            <div style={boxStyle}>{props.children}</div>
+        </React.Fragment>
     )
 }
+
+
 
 export default DnDContainer
