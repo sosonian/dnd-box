@@ -20,6 +20,7 @@ dnd-box 僅需安裝 React，不須 jQuery 或其他程式庫
 - [DnDLayout Props](#DnDLayout-Props)
 - [DnDContainer Props](#DnDContainer-props)
 - [Contribute](#contribute)
+- [Version](#version)
 
 ## Demos
 - [Showcase](https://sosonian.github.io/dndboxdemo/)
@@ -253,6 +254,10 @@ String or number, the ID of container. Input could be number or string, but must
 String or number, the ID of box which this container belongs to.
 
 輸入值是字串或數字, 其為功能區塊將掛載的子視窗的ID.
+
+
+## Version
+
 
 
 ## License
