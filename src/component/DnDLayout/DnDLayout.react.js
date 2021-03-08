@@ -1202,10 +1202,10 @@ class DnDLayout extends React.Component {
     }
 
     appendBackgroundDom=()=>{
-        let dom = this.props.children.find(child=>child.type.name === "DnDBackgroundComponent")
+        let dom = this.props.children.find(child=>child.props.dndType === "dndBackground")
         if(dom)
         {
-            console.log("A1")
+            console.log(dom)
             return <div style={{width:this.props.width?this.props.width:'100%',height:this.props.height?this.props.height:'100%'}}>{dom.props.children}</div>
         }
         else
