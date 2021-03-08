@@ -1108,16 +1108,16 @@ class DnDLayout extends React.Component {
     }
 
     appendBackgroundDom=()=>{
-        console.log(this.props.children)
+        //console.log(this.props.children)
         let dom = this.props.children.find(child=>child.props.dndType === "DnDBackground")
         if(dom)
         {
-            console.log("A1")
+            //console.log("A1")
             return <React.Fragment>{dom.props.children}</React.Fragment>
         }
         else
         {
-            console.log("A2")
+            //console.log("A2")
             return null
         }
     }
@@ -1224,7 +1224,7 @@ class DnDLayout extends React.Component {
     }
 
     render(){
-        console.log("DnDLayout render")
+        //console.log("DnDLayout render")
         const layoutStyle = {
             width:this.props.width?this.props.width:'100%',
             height:this.props.height?this.props.height:'100%',
