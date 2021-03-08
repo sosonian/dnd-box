@@ -20,10 +20,14 @@ dnd-box 僅需安裝 React，不須 jQuery 或其他程式庫
 - [DnDLayout Props](#DnDLayout-Props)
 - [DnDContainer Props](#DnDContainer-props)
 - [Contribute](#contribute)
+- [Versions](#versions)
 
 ## Demos
 - [Showcase](https://sosonian.github.io/dndboxdemo/)
-- [THREE.js]
+![](dndboxdemo1.gif)
+
+- [THREE.js](https://sosonian.github.io/demotest/)
+![](dndboxdemo2.gif)
 
 ## Features
 * Draggable box (sub window)
@@ -38,9 +42,11 @@ npm install --save dnd-box
 
 ## Usage
 
+如何使用
+
 ```jsx
 import React, { Component } from 'react'
-import { DnDContainer,DnDLayout } from 'dnd-box'
+import { DnDLayout, DnDBackground, DnDContainer } from 'dnd-box'
 
 class DemoApp extends Component {
     render() {
@@ -59,6 +65,9 @@ class DemoApp extends Component {
         
         return (
             <DnDLayout width={1800} height={800}>
+                <DnDBackground dndType={'DnDBackground'}>
+                    {"This is background of layout"}
+                <DnDBackground>
                 <DnDContainer containerTabTitle={"TabA"} containerID={1} boxID={1}>
                     <div>
                         {"ChildrenComponentA"}
@@ -83,7 +92,13 @@ export default DemoApp
 ```
 
 
-## DnDLayout Props
+## DnDLayout
+
+It's the layout of dnd-box, the parent component of all box components. User could determine the width and height of it, and every box could not be dragged out of the layout (when box is collided the border of layout, box-dragging would be stopped).
+State of every box would be stored in the state of DnDLayout, when box-dragging or container-dragging is finished, layout would pass the state throw the props 'getBoxesState' to parent component.
+
+DnD 版面 (DnDLayout) 是所有子視窗的 parent component. 使用者可以定義版面的寬度、長度，之後當拖曳子視窗時，其不能超過版面的邊界，當子視窗跟版面邊界碰觸時，拖曳動作就會停止 (子視窗的放大動作邏輯也是一樣，碰觸版面邊界時，動作就會停止)。
+所有子視窗的 state 會存在版面的 state 中，當拖曳或縮放動作完成時，版面會把所有子視窗的狀態透過 getBoxesState 這個 props 回傳至 DnDLayout的父元件。
 
 List of Props of DnDLayout
 
@@ -219,11 +234,33 @@ Callback, when dragging of tab of container complete, it would send back an arra
 * showingContainerIndex : 此子視窗掛載的功能區塊中, 目前是為選取狀態的功能區塊, 其於 containerArray 中的 index, 數字.
 
 
-## DnDContainer Props
+
+## DnDBackground
+
+It's the background or workplace component of dnd-box, like the canvas of Photoshop, or editor of Visual Studio, or workplace of Autocad. But dnd-box is ok without DnDBackground component.
+There is only one DnDBackground component in DnDLayout, if there are two, the second one would be omitted.
+
+DnDBackground 是 dnd-box 的背景元件，作用就像 Photoshop 的畫布、Visual Studio 的編輯器，或是 Autocad 中的工作區。如果使用者不使用 DnDBackground 也可以，子視窗一樣可以在版面上拖曳、縮放。
+DnDLayout 只會有一個 DnDBackground 元件，如果設置兩個，第二個會被忽略。
+
+List of DnDBackground:
+
+DnDBackground的 props 列表
+
+### dndType
+String, the value must be 'DnDBackground', else the background component would not be placed.
+
+dndType 需輸入子串，且值必須是 'DnDBackground', 如果值不符合或未定義，則 DnDBackground 元件就不會被設置。
+
+
+
+## DnDContainer
+
+It's the content of box (sub-window) of DnDLayout. Every box
 
 List of Props of DnDContainer
 
-DnDcontainer 的 props 列表
+DnDcontainer 的 props 列表:
 
 ### containerTabTitle
 String, the title of container.
@@ -249,6 +286,7 @@ String or number, the ID of box which this container belongs to.
 
 輸入值是字串或數字, 其為功能區塊將掛載的子視窗的ID.
 
+## Versions
 
 ## License
 
