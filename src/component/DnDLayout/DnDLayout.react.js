@@ -1113,7 +1113,7 @@ class DnDLayout extends React.Component {
         if(dom)
         {
             console.log("A1")
-            return <React.Fragment>{dom.prop.children}</React.Fragment>
+            return <React.Fragment>{dom.props.children}</React.Fragment>
         }
         else
         {
