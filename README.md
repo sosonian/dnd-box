@@ -20,6 +20,7 @@ dnd-box 僅需安裝 React，不須 jQuery 或其他程式庫
 - [DnDLayout Props](#DnDLayout-Props)
 - [DnDContainer Props](#DnDContainer-props)
 - [Contribute](#contribute)
+- [Versions](#versions)
 
 ## Demos
 - [Showcase](https://sosonian.github.io/dndboxdemo/)
@@ -97,7 +98,7 @@ It's the layout of dnd-box, the parent component of all box components. User cou
 State of every box would be stored in the state of DnDLayout, when box-dragging or container-dragging is finished, layout would pass the state throw the props 'getBoxesState' to parent component.
 
 DnD 版面 (DnDLayout) 是所有子視窗的 parent component. 使用者可以定義版面的寬度、長度，之後當拖曳子視窗時，其不能超過版面的邊界，當子視窗跟版面邊界碰觸時，拖曳動作就會停止 (子視窗的放大動作邏輯也是一樣，碰觸版面邊界時，動作就會停止)。
-所有子視窗的 state 會存在版面的 state 中，當拖曳或縮放動作完成時，版面會把所有子視窗的狀態透過 getBoxesState 這個 props 回傳至 DnDLayout的父元素。
+所有子視窗的 state 會存在版面的 state 中，當拖曳或縮放動作完成時，版面會把所有子視窗的狀態透過 getBoxesState 這個 props 回傳至 DnDLayout的父元件。
 
 List of Props of DnDLayout
 
@@ -281,6 +282,7 @@ String or number, the ID of box which this container belongs to.
 
 輸入值是字串或數字, 其為功能區塊將掛載的子視窗的ID.
 
+## Versions
 
 ## License
 
