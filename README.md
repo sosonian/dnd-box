@@ -238,25 +238,27 @@ Callback, when dragging of tab of container complete, it would send back an arra
 ## DnDBackground
 
 It's the background or workplace component of dnd-box, like the canvas of Photoshop, or editor of Visual Studio, or workplace of Autocad. But dnd-box is ok without DnDBackground component.
+There is only one DnDBackground component in DnDLayout, if there are two, the second one would be omitted.
 
 DnDBackground 是 dnd-box 的背景元件，作用就像 Photoshop 的畫布、Visual Studio 的編輯器，或是 Autocad 中的工作區。如果使用者不使用 DnDBackground 也可以，子視窗一樣可以在版面上拖曳、縮放。
+DnDLayout 只會有一個 DnDBackground 元件，如果設置兩個，第二個會被忽略。
 
-List of DnDBackground
+List of DnDBackground:
 
 DnDBackground的 props 列表
 
-
-
 ### dndType
-String, the value must be 'DnDBackground', else background component would not be placed.
+String, the value must be 'DnDBackground', else the background component would not be placed.
 
-dndType 需輸入子串，且值必須是 'DnDBackground', 如果值不符合，或沒有，則 DnDBackground 元件就不會被設置。
+dndType 需輸入子串，且值必須是 'DnDBackground', 如果值不符合或未定義，則 DnDBackground 元件就不會被設置。
+
+
 
 ## DnDContainer Props
 
 List of Props of DnDContainer
 
-DnDcontainer 的 props 列表
+DnDcontainer 的 props 列表:
 
 ### containerTabTitle
 String, the title of container.
