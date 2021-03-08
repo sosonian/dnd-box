@@ -105,6 +105,12 @@ class DemoApp extends Component{
         this.renderer4.setClearColor(0xeeeeee, 1.0)
 
         this.cameraControl1 = new orbControls(this.camera1,this.renderer.domElement)
+        this.cameraControl2 = new OrbitControls(this.camera2,this.renderer2.domElement)
+        this.cameraControl3 = new OrbitControls(this.camera3,this.renderer3.domElement)
+        this.cameraControl4 = new OrbitControls(this.camera4,this.renderer4.domElement)
+        this.cameraControl2.enableRotate = false
+        this.cameraControl3.enableRotate = false
+        this.cameraControl4.enableRotate = false
         this.animate()
     }
 
@@ -129,33 +135,28 @@ class DemoApp extends Component{
     }
 
     resizeFrontView=()=>{
-        if(!this.cameraControl2)
+        if(this.frontView.children && this.frontView.children.length >0)
         {
-            this.cameraControl2 = new OrbitControls(this.camera2,this.renderer2.domElement)   
+            this.frontView.removeChild(this.frontView.firstChild)
         }
-        this.cameraControl2.enableRotate = false
-
         this.renderer2.setSize(this.state.frontViewSize.w-1, this.state.frontViewSize.h-1)
         this.frontView.appendChild( this.renderer2.domElement )
-
     }
 
     resizeSideView=()=>{
-        if(!this.cameraControl3)
+        if(this.sideView.children && this.sideView.children.length >0)
         {
-            this.cameraControl3 = new OrbitControls(this.camera3,this.renderer3.domElement)   
+            this.sideView.removeChild(this.sideView.firstChild)
         }
-        this.cameraControl3.enableRotate = false
         this.renderer3.setSize(this.state.sideViewSize.w-1, this.state.sideViewSize.h-1)
         this.sideView.appendChild( this.renderer3.domElement )
     }
 
     resizeTopView=()=>{
-        if(!this.cameraControl4)
+        if(this.topView.children && this.topView.children.length >0)
         {
-            this.cameraControl4 = new OrbitControls(this.camera4,this.renderer4.domElement)   
+            this.topView.removeChild(this.topView.firstChild)
         }
-        this.cameraControl4.enableRotate = false
         this.renderer4.setSize(this.state.topViewSize.w-1, this.state.topViewSize.h-1)
         this.topView.appendChild( this.renderer4.domElement )
     }
