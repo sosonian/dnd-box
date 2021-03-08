@@ -1024,7 +1024,7 @@ class DnDLayout extends React.Component {
         if(tempObj)
         {
             output = this.props.children.find(child=>
-                child.type.name === "DnDContainer" && child.props.containerID === tempObj.containerID       
+                child.props.dndType !== "DnDBackground" && child.props.containerID === tempObj.containerID       
             )
         }
         else
