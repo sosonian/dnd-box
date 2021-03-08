@@ -41,7 +41,7 @@ npm install --save dnd-box
 
 ## Usage
 
-使用方式
+如何使用
 
 ```jsx
 import React, { Component } from 'react'
@@ -91,7 +91,13 @@ export default DemoApp
 ```
 
 
-## DnDLayout Props
+## DnDLayout
+
+It's the layout of dnd-box, the parent component of all box components. User could determine the width and height of it, and every box could not be dragged out of the layout (when box is collided the border of layout, box-dragging would be stopped).
+State of every box would be stored in the state of DnDLayout, when box-dragging or container-dragging is finished, layout would pass the state throw the props 'getBoxesState' to parent component.
+
+DnD版面 (DnDLayout) 是所有子視窗的父元素 (react component). 使用者可以定義版面的寬度、長度，之後當拖曳子視窗時，其不能超過版面的邊界，當子視窗跟版面邊界碰觸時，拖曳動作就會停止 (子視窗的放大動作邏輯也是一樣，碰觸版面邊界時，動作就會停止)。
+所有子視窗的狀態會存在版面的狀態中(react state)，當拖曳或縮放動作完成時，版面會把所有子視窗的狀態透過 getBoxesState 這個 props 回傳至 DnDLayout的父元素。
 
 List of Props of DnDLayout
 
@@ -226,6 +232,17 @@ Callback, when dragging of tab of container complete, it would send back an arra
     domObj : 此功能區塊底下的子元件 (react component), 物件.
 * showingContainerIndex : 此子視窗掛載的功能區塊中, 目前是為選取狀態的功能區塊, 其於 containerArray 中的 index, 數字.
 
+
+## DnDBackground
+
+It's the background component of dnd-box. It is like the canvas of Photoshop
+
+List of DnDBackground
+
+DnDBackground的 props 列表
+
+### dndType
+String, the value must be 'DnDBackground', else background component would not show.
 
 ## DnDContainer Props
 
