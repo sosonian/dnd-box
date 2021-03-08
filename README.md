@@ -233,16 +233,23 @@ Callback, when dragging of tab of container complete, it would send back an arra
 * showingContainerIndex : 此子視窗掛載的功能區塊中, 目前是為選取狀態的功能區塊, 其於 containerArray 中的 index, 數字.
 
 
+
 ## DnDBackground
 
-It's the background component of dnd-box. It is like the canvas of Photoshop,
+It's the background or workplace component of dnd-box, like the canvas of Photoshop, or editor of Visual Studio, or workplace of Autocad. But dnd-box is ok without DnDBackground component.
+
+DnDBackground 是 dnd-box 的背景元件，作用就像 Photoshop 的畫布、Visual Studio 的編輯器，或是 Autocad 中的工作區。如果使用者不使用 DnDBackground 也可以，子視窗一樣可以在版面上拖曳、縮放。
 
 List of DnDBackground
 
 DnDBackground的 props 列表
 
+
+
 ### dndType
-String, the value must be 'DnDBackground', else background component would not show.
+String, the value must be 'DnDBackground', else background component would not be placed.
+
+dndType 需輸入子串，且值必須是 'DnDBackground', 如果值不符合，或沒有，則 DnDBackground 元件就不會被設置。
 
 ## DnDContainer Props
 
