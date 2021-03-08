@@ -1,7 +1,6 @@
 import * as React from "react";
 import DnDBox from './DnDBox'
 import ShadowDnDBox from './ShadowDnDBox.js'
-import styles from '../../styles.module.css'
 import LinkedList from '../../Utilities/LinkedList'
 import {v4 as uuidv4} from 'uuid'
 

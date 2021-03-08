@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const DnDBackgroundComponent = (props) =>{
+const DnDBackground = (props) =>{
       
     return (
         <React.Fragment>   
@@ -11,4 +11,4 @@ const DnDBackgroundComponent = (props) =>{
 
 
 
-export default DnDBackgroundComponent
+export default DnDBackground

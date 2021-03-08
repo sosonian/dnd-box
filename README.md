@@ -40,7 +40,7 @@ npm install --save dnd-box
 
 ```jsx
 import React, { Component } from 'react'
-import { DnDContainer,DnDLayout } from 'dnd-box'
+import { DnDLayout, DnDBackground, DnDContainer } from 'dnd-box'
 
 class DemoApp extends Component {
     render() {
@@ -59,6 +59,7 @@ class DemoApp extends Component {
         
         return (
             <DnDLayout width={1800} height={800}>
+                <DnD>
                 <DnDContainer containerTabTitle={"TabA"} containerID={1} boxID={1}>
                     <div>
                         {"ChildrenComponentA"}
