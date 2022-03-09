@@ -64,7 +64,7 @@ class DemoApp extends Component {
         ]
         
         return (
-            <DnDLayout width={1800} height={800}>
+            <DnDLayout width={1800} height={800} boxesSetting={boxesSetting} >
                 <DnDBackground dndType={'DnDBackground'}>
                     {"This is background of layout"}
                 <DnDBackground>
